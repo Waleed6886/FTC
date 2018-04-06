@@ -53,7 +53,7 @@ public class RemoteDataSource  {
         dataSource.sendVerification(mobile,code).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.e("RemoteDataSource", "onResponse: "+response.body().getMobile()+"------------"+call);
+//                Log.e("RemoteDataSource", "onResponse: "+response.body().getMobile()+"------------"+call);
 
             }
 

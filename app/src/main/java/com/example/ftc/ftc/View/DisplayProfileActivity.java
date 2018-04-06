@@ -8,7 +8,7 @@ import android.view.MenuItem;
 
 import com.example.ftc.ftc.R;
 
-public class DisplayProfile extends AppCompatActivity {
+public class DisplayProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class DisplayProfile extends AppCompatActivity {
     }
 
     private void editProfile(){
-        Intent intent = new Intent(this, EditProfile.class);
+        Intent intent = new Intent(this, EditProfileActivity.class);
         startActivity(intent);
     }
 

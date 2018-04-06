@@ -26,7 +26,7 @@ import com.example.ftc.ftc.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReceiveCode extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ReceiveCodeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private EditText mCodeEditText;
     private View mProgressView;
@@ -146,6 +146,8 @@ public class ReceiveCode extends AppCompatActivity implements LoaderManager.Load
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
             cursor.moveToNext();
         }
+
+        showProgress(false);
     }
 
     @Override

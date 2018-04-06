@@ -2,7 +2,9 @@ package com.example.ftc.ftc.API;
 
 import android.util.Log;
 
+import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.Model.Login.User;
+import com.example.ftc.ftc.View.LoginActivity;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -34,34 +36,31 @@ public class RemoteDataSource  {
 
     public void sendMobileNumber(String mobile) {
         Boolean authenticated = false;
-        dataSource.sendNumber(mobile).enqueue(new Callback<User>() {
+        dataSource.sendNumber(mobile).enqueue(new Callback<Authenticator>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Authenticator> call, Response<Authenticator> response) {
                 Log.e("RemoteDataSource", "onResponse: "+response.body());
-
-
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Authenticator> call, Throwable t) {
 
             }
         });
     }
 
     public void sendSMS(String mobile,String code) {
-        dataSource.sendVerification(mobile,code).enqueue(new Callback<User>() {
+        dataSource.sendVerification(mobile,code).enqueue(new Callback<Authenticator>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Log.e("RemoteDataSource", "onResponse: "+response.body().getMobile()+"------------"+call);
+            public void onResponse(Call<Authenticator> call, Response<Authenticator> response) {
+                Authenticator authenticator = response.body();
 
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Authenticator> call, Throwable t) {
 
             }
         });
-
     }
 }

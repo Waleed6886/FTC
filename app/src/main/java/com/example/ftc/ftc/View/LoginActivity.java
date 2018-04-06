@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     static RemoteDataSource remoteDataSource = new RemoteDataSource();
-    static User user = new User();
+    static public User user = new User();
 
 
     @Override

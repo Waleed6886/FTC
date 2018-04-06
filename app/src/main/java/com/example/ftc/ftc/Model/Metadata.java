@@ -36,8 +36,11 @@ public class Metadata {
         this.imgPath = imgPath;
     }
 
-    public Integer getType() {
-        return type;
+    public String getType() {
+        String[] restaurantTypes={"Burger","Barbecue","Mexican","Chinese","Italian","Middle Eastern","Fast Food","Sandwich","Fried Chicken"};
+
+
+        return restaurantTypes[type];
     }
 
     public void setType(Integer type) {

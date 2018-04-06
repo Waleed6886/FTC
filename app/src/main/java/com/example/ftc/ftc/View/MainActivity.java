@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         m.setImgPath("http://cdn2.alphr.com/sites/alphr/files/styles/16x9_640/public/2018/01/6180104944_56c7ce7e91_b.jpg?itok=Wx-T0ms-");
         m.setName("this is the name");
         m.setType(1);
+        m.setWorkingHours("12PM - 3AM");
         p.setMetadata(m);
         return p;
 

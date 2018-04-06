@@ -1,6 +1,7 @@
 package com.example.ftc.ftc.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
  */
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
-    List<Post> PostList;
+    static List<Post> PostList;
     Context context;
 
     public PostAdapter(List<Post> PostList ,Context context){
@@ -50,6 +51,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 .centerCrop()
                 .resize(100,100)
                 .into(holder.PostMainImg);
+        holder.setOnclick(position);
 
     }
 
@@ -81,6 +83,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             PostMainImg = itemView.findViewById(R.id.PostImg);
             PostTitle= itemView.findViewById(R.id.PostMainTitle);
             PostDescription=itemView.findViewById(R.id.PostDescription);
+
+        }
+
+        void setOnclick(final int postion){
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.w("onClick","clicked"+postion);
+                    Intent i = new Intent(context,PostDetails.class);
+                    i.putExtra("post",postion+"");
+                    context.startActivity(i);
+                }
+            });
         }
     }
 

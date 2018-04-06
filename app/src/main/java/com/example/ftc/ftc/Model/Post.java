@@ -1,6 +1,13 @@
 package com.example.ftc.ftc.Model;
+import android.location.Address;
+import android.location.Geocoder;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+import java.util.Locale;
+
 public class Post {
 
     @SerializedName("latitude")
@@ -58,6 +65,7 @@ public class Post {
     public void setMetadata(Metadata metadata) {
         this.metadata = metadata;
     }
+
 
 
 }

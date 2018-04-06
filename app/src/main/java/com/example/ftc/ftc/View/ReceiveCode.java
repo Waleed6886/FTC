@@ -59,13 +59,14 @@ public class ReceiveCode extends AppCompatActivity implements LoaderManager.Load
         mCodeEditText.setError(null);
 
         // Store values at the time of the login attempt.
-        String phoneNumber = mCodeEditText.getText().toString();
+        String receivedCode = mCodeEditText.getText().toString();
+        LoginActivity.remoteDataSource.sendSMS(LoginActivity.user.getMobile(),receivedCode);
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(phoneNumber)) {
+        if (TextUtils.isEmpty(receivedCode)) {
             mCodeEditText.setError(getString(R.string.error_field_required));
             focusView = mCodeEditText;
             cancel = true;

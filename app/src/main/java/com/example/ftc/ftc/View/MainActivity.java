@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void init() {
-        RemoteDataSource remoteDataSource = new RemoteDataSource();
-        remoteDataSource.sendMobileNumber("+966532214868");
+
 
 
     }

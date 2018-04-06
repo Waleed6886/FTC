@@ -15,6 +15,6 @@ public interface DataSource {
 
     @POST("/api/v1/auth")
     @FormUrlEncoded
-    Call<User> sendVerification(@Field("code") String verificationCode);
+    Call<User> sendVerification(@Field("mobile") String mobile, @Field("code") String verificationCode);
 
 }

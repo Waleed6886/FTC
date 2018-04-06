@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 
+import com.example.ftc.ftc.API.RemoteDataSource;
+import com.example.ftc.ftc.Model.Login.User;
 import com.example.ftc.ftc.R;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -26,6 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPhoneNumberEditText;
     private View mProgressView;
     private View mLoginFormView;
+    static RemoteDataSource remoteDataSource = new RemoteDataSource();
+    static User user = new User();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // Store values at the time of the login attempt.
         String phoneNumber = mPhoneNumberEditText.getText().toString();
+        user.setMobile(phoneNumber);
+        remoteDataSource.sendMobileNumber(phoneNumber);
+
 
         boolean cancel = false;
         View focusView = null;

@@ -47,8 +47,8 @@ public class RemoteDataSource  {
         });
     }
 
-    private void sendSMS(String code) {
-        dataSource.sendVerification(code).enqueue(new Callback<User>() {
+    public void sendSMS(String mobile,String code) {
+        dataSource.sendVerification(mobile,code).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.e("RemoteDataSource", "onResponse: "+response.body());

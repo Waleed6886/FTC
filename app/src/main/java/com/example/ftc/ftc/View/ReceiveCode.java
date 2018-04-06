@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -61,7 +62,7 @@ public class ReceiveCode extends AppCompatActivity implements LoaderManager.Load
         // Store values at the time of the login attempt.
         String receivedCode = mCodeEditText.getText().toString();
         LoginActivity.remoteDataSource.sendSMS(LoginActivity.user.getMobile(),receivedCode);
-        
+
 
         boolean cancel = false;
         View focusView = null;
@@ -80,7 +81,9 @@ public class ReceiveCode extends AppCompatActivity implements LoaderManager.Load
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+//            showProgress(true);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
 
         }
     }

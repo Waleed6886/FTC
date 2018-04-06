@@ -4,7 +4,10 @@ import android.util.Log;
 
 import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.Model.Login.User;
+import com.example.ftc.ftc.Model.Post;
 import com.example.ftc.ftc.View.LoginActivity;
+
+import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +35,24 @@ public class RemoteDataSource  {
     Retrofit retrofit = builder.build();
 
     DataSource dataSource = retrofit.create(DataSource.class);
+    Call<List<Post>> postListCall = dataSource.getPost();
+
     GetResponse getResponse;
+    public void getPostListCall(final GetPost getPost){
+        postListCall.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                List<Post> posts = response.body();
+                getPost.passPostList(posts);
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+
+            }
+        });
+
+    }
 
     public void sendMobileNumber(String mobile) {
         Boolean authenticated = false;

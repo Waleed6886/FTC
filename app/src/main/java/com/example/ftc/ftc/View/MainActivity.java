@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.ftc.ftc.API.GetPost;
 import com.example.ftc.ftc.API.RemoteDataSource;
 import com.example.ftc.ftc.Model.Metadata;
 import com.example.ftc.ftc.Model.Post;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,GetPost {
     private Post generateDumbData(){
         Post p = new Post();
         p.setDescription("this is the Description");
@@ -146,5 +147,10 @@ public class MainActivity extends AppCompatActivity
     public void displayProfile(){
         Intent intent = new Intent(this, DisplayProfileActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void passPostList(final List list) {
+
     }
 }

@@ -46,7 +46,7 @@
             android:name=".View.DisplayProfile"
             android:label="@string/profile">
         </activity>
-
+        <activity android:name=".View.PostDetails"/>
     </application>
 
 </manifest>

@@ -16,8 +16,6 @@ import com.example.ftc.ftc.API.RemoteDataSource;
 import com.example.ftc.ftc.Model.Login.User;
 import com.example.ftc.ftc.R;
 
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -86,7 +84,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void receiveCode(){
-        Intent intent = new Intent(this, ReceiveCode.class);
+        Intent intent = new Intent(this, ReceiveCodeActivity.class);
+
         startActivity(intent);
     }
 

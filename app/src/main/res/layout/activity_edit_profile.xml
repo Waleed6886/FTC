@@ -11,8 +11,8 @@
         android:gravity="center"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/userImage"
+        <ImageButton
+            android:id="@+id/userImageUpdate"
             android:layout_width="150dp"
             android:layout_height="150dp"/>
 
@@ -21,9 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="0dp"
@@ -32,18 +30,18 @@
             android:gravity="center"
             android:text="@string/name" />
 
-        <TextView
-            android:id="@+id/userName"
+        <EditText
+            android:id="@+id/userNameUpdate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:hint="@string/name"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="0dp"
@@ -52,32 +50,15 @@
             android:gravity="center"
             android:text="@string/email" />
 
-        <TextView
-            android:id="@+id/userEmil"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
-
-        <TextView
+        <EditText
+            android:id="@+id/userEmilUpdate"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/phone" />
-
-        <TextView
-            android:id="@+id/userMobile"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:hint="@string/email"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>

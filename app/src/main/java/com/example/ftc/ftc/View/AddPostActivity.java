@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.example.ftc.ftc.R;
 
-public class AddPost extends AppCompatActivity {
+public class AddPostActivity extends AppCompatActivity {
 
     private EditText mName;
     private EditText mCategory;

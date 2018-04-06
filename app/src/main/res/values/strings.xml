@@ -35,4 +35,6 @@
     <string name="workingHours">Working Hours</string>
     <string name="location">Location</string>
     <string name="profile">Profile</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone Number</string>
 </resources>

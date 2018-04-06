@@ -30,8 +30,10 @@ public class RemoteDataSource  {
     Retrofit retrofit = builder.build();
 
     DataSource dataSource = retrofit.create(DataSource.class);
+    GetResponse getResponse;
 
     public void sendMobileNumber(String mobile) {
+        Boolean authenticated = false;
         dataSource.sendNumber(mobile).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -51,7 +53,8 @@ public class RemoteDataSource  {
         dataSource.sendVerification(mobile,code).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.e("RemoteDataSource", "onResponse: "+response.body());
+                Log.e("RemoteDataSource", "onResponse: "+response.body().getMobile()+"------------"+call);
+
             }
 
             @Override

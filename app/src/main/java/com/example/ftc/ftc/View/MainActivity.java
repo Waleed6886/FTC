@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity
 
     private void init() {
         RemoteDataSource remoteDataSource = new RemoteDataSource();
-        remoteDataSource.getPostListCall(MainActivity.this);
+        remoteDataSource.getPostListCall(MainActivity.this,
+                "c4523bf0f0f6767ff7b23855ba3bc7dd4f4f71572f07723e8b3ce6d8306910f1");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         postAdapter = new PostAdapter(listofPost,this);
         RecyclerView recyclerView =findViewById(R.id.rec1);

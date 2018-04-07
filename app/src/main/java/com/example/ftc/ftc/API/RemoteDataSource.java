@@ -1,12 +1,9 @@
 package com.example.ftc.ftc.API;
 
 import android.util.Log;
-
 import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.Model.Post;
-
 import java.util.List;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 import okhttp3.OkHttpClient;
@@ -97,11 +94,11 @@ public class RemoteDataSource  {
 
 
 
-    Call<List<Post>> postCall = dataSource.getPost("bearer 383d373bc2cc6dd3a0286b3eafc3c1178224cb880e36c87d6648e6feeb0a9d85");
 
     GetResponse getResponse;
-    public void getPostListCall(final GetPost getPost){
-            postCall.enqueue(new Callback<List<Post>>() {
+    public void getPostListCall(final GetPost getPost,String token){
+        Call<List<Post>> postCall = dataSource.getPost("bearer "+token);
+        postCall.enqueue(new Callback<List<Post>>() {
                 @Override
                 public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
                     List<Post> posts = response.body();

@@ -11,7 +11,10 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Locale;
 
-public class Post implements Parcelable {
+import io.realm.Realm;
+import io.realm.RealmObject;
+
+public class Post extends RealmObject implements Parcelable {
 
     @SerializedName("latitude")
     @Expose

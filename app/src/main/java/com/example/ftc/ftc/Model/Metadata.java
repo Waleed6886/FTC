@@ -4,12 +4,14 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import io.realm.RealmObject;
+
 /**
  * Created by Nawif on 4/6/18.
  */
 
-public class Metadata implements Parcelable {
-    private String[] restaurantTypes={"Burger","Barbecue","Mexican","Chinese","Italian","Middle Eastern","Fast Food","Sandwich","Fried Chicken","Other"};
+public class Metadata extends RealmObject implements Parcelable {
 
     @SerializedName("name")
     @Expose
@@ -28,7 +30,6 @@ public class Metadata implements Parcelable {
     }
 
     protected Metadata(Parcel in) {
-        restaurantTypes = in.createStringArray();
         name = in.readString();
         imgPath = in.readString();
         if (in.readByte() == 0) {
@@ -41,7 +42,6 @@ public class Metadata implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(restaurantTypes);
         dest.writeString(name);
         dest.writeString(imgPath);
         if (type == null) {
@@ -70,10 +70,6 @@ public class Metadata implements Parcelable {
         }
     };
 
-    public String[] getRestaurantTypes() {
-        return restaurantTypes;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,10 +84,6 @@ public class Metadata implements Parcelable {
 
     public String getWorkingHours() {
         return workingHours;
-    }
-
-    public void setRestaurantTypes(String[] restaurantTypes) {
-        this.restaurantTypes = restaurantTypes;
     }
 
     public void setName(String name) {

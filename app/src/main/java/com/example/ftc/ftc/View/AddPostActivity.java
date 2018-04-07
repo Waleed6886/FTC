@@ -111,11 +111,11 @@ public class AddPostActivity extends AppCompatActivity {
 
                 post.setDescription(mDescription.getText()+"");
 //        post.setUser();
-                Metadata metadata=new Metadata();
-                metadata.setWorkingHours(mWorkingHours.getText()+"");
-                metadata.setType(mCategory.getText()+"");
-//        metadata.setImgPath();
-                post.setMetadata(metadata);
+//                Metadata metadata=new Metadata();
+//                metadata.setWorkingHours(mWorkingHours.getText()+"");
+//                metadata.setType(mCategory.getText()+"");
+////        metadata.setImgPath();
+//                post.setMetadata(metadata);
                 post.setMetadataKey("foodTruck");
             }
         });

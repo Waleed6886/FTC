@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Locale;
 
-public class Post implements Parcelable{
+public class Post implements Parcelable {
 
     @SerializedName("latitude")
     @Expose
@@ -47,6 +47,9 @@ public class Post implements Parcelable{
     @Expose
     private User user;
 
+    public Post() {
+    }
+
     protected Post(Parcel in) {
         if (in.readByte() == 0) {
             latitude = null;
@@ -60,6 +63,7 @@ public class Post implements Parcelable{
         }
         description = in.readString();
         metadataKey = in.readString();
+        metadata = in.readParcelable(Metadata.class.getClassLoader());
         postId = in.readString();
         statusId = in.readInt();
         postImage = in.readString();
@@ -79,63 +83,6 @@ public class Post implements Parcelable{
         }
     };
 
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public int getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getPostImage() {
-        return postImage;
-    }
-
-    public void setPostImage(String postImage) {
-        this.postImage = postImage;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Double getLatitude() {
         return latitude;
     }
@@ -144,31 +91,85 @@ public class Post implements Parcelable{
         return longitude;
     }
 
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getMetadataKey() {
         return metadataKey;
     }
 
-    public void setMetadataKey(String metadataKey) {
-        this.metadataKey = metadataKey;
-    }
-
     public Metadata getMetadata() {
         return metadata;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public int getStatusId() {
+        return statusId;
+    }
+
+    public String getPostImage() {
+        return postImage;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setMetadataKey(String metadataKey) {
+        this.metadataKey = metadataKey;
     }
 
     public void setMetadata(Metadata metadata) {
         this.metadata = metadata;
     }
 
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
+
+    public void setPostImage(String postImage) {
+        this.postImage = postImage;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public int describeContents() {
@@ -191,6 +192,7 @@ public class Post implements Parcelable{
         }
         dest.writeString(description);
         dest.writeString(metadataKey);
+        dest.writeParcelable(metadata, flags);
         dest.writeString(postId);
         dest.writeInt(statusId);
         dest.writeString(postImage);

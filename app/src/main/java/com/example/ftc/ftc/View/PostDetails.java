@@ -30,10 +30,10 @@ TODO:MAKE A POST HAVE MORE THAN ONE IMAGE AND ENHANCE UI
  */
 
 public class PostDetails extends AppCompatActivity implements OnMapReadyCallback {
-    TextView postTitle, postCategory, postDescription, postWorkingHours, postLocation;
+    TextView postTitle, postCategory, postDescription, postWorkingHours;
     ImageView postImage;
     public static final String POST_KEY = "POST";
-    Bundle extras = getIntent().getExtras();
+    Bundle extras;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_details);
@@ -50,18 +50,20 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     }
 
         private void setViews (){
-
+               extras = getIntent().getExtras();
             if (extras != null) {
                 Post postData = extras.getParcelable(POST_KEY);
 
-            postTitle.setText(postData.getMetadata().getName());
-            postCategory.setText(postData.getMetadata().getType()); //TODO: MAKE TYPE RETURN STRING WITH THE NAME OF THE CATEGORY
-            postDescription.setText(postData.getDescription());
-            postWorkingHours.setText(postData.getMetadata().getWorkingHours());
-            postLocation.setText(postData.getLatitude() + ""); //TODO:MAKE A METHOD THAT RETURNS A STRING THAT CONTAINS THE ADDRESS
-            Picasso.get()
-                    .load(postData.getMetadata().getImgPath())
-                    .into(postImage);
+                if (postData != null) {
+                    postTitle.setText(postData.getMetadata().getName());
+                 //   postCategory.setText(postData.getMetadata().getType()); //TODO: MAKE TYPE RETURN STRING WITH THE NAME OF THE CATEGORY
+                    postDescription.setText(postData.getDescription());
+                    postWorkingHours.setText(postData.getMetadata().getWorkingHours());
+                    Picasso.get()
+                            .load(postData.getMetadata().getImgPath())
+                            .into(postImage);
+                }
+
             }
         }
 
@@ -70,11 +72,11 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
             postCategory = findViewById(R.id.postDetailsCategory);
             postDescription = findViewById(R.id.postDetailsDesc);
             postWorkingHours = findViewById(R.id.postDetailsWorkingHours);
-            postLocation = findViewById(R.id.postDetailsLocation);
             postImage = findViewById(R.id.postDetailsImg);
         }
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        extras = getIntent().getExtras();
         if (extras != null) {
             Post postData = extras.getParcelable(POST_KEY);
         LatLng foodTruckLocation = new LatLng(postData.getLatitude(), postData.getLongitude());

@@ -96,9 +96,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 public void onClick(View view) {
                     Intent intent = new Intent(context,PostDetails.class);
                     Bundle bundle = new Bundle();
-                    bundle.putParcelable(PostDetails.POST_KEY,(Post) view.getTag(R.id.Post));
+                    Post post  = PostList.get(postion);
+                    bundle.putParcelable(PostDetails.POST_KEY,post);
+                    // TODO: 4/7/2018
                     intent.putExtras(bundle);
-                    view.getContext().startActivity(intent);
+                    context.startActivity(intent);
                 }
             });
         }

@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         String phoneNumber = mPhoneNumberEditText.getText().toString();
 
-        authenticator.getUser().setMobile(phoneNumber);
+        Authenticator.getUser().setMobile(phoneNumber);
         remoteDataSource.sendMobileNumber(phoneNumber);
 
 

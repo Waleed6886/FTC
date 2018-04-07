@@ -10,6 +10,8 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface DataSource {
@@ -22,6 +24,6 @@ public interface DataSource {
     @FormUrlEncoded
     Call<Authenticator> sendVerification(@Field("mobile") String mobile, @Field("code") String verificationCode);
 
-    @GET("/api/v1/posts?latitude=46.671665&longitude= 24.714811&status_id=0&radius_km=5&metadata_key=foodTurck")
-    Call<List<Post>> getPost();
+    @GET("/api/v1/posts?latitude=46.671665&longitude= 24.714811&status_id=0&radius_km=5")
+    Call<List<Post>> getPost(@Header("Authorization") String access_token);
 }

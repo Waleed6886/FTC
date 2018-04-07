@@ -7,9 +7,12 @@ import com.example.ftc.ftc.Model.Login.User;
 import com.example.ftc.ftc.Model.Post;
 import com.example.ftc.ftc.View.LoginActivity;
 
+import java.io.IOException;
 import java.util.List;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,24 +38,7 @@ public class RemoteDataSource  {
     Retrofit retrofit = builder.build();
 
     DataSource dataSource = retrofit.create(DataSource.class);
-    Call<List<Post>> postListCall = dataSource.getPost();
 
-    GetResponse getResponse;
-    public void getPostListCall(final GetPost getPost){
-        postListCall.enqueue(new Callback<List<Post>>() {
-            @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                List<Post> posts = response.body();
-                getPost.passPostList(posts);
-            }
-
-            @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-
-            }
-        });
-
-    }
 
     public void sendMobileNumber(String mobile) {
         Boolean authenticated = false;
@@ -82,6 +68,26 @@ public class RemoteDataSource  {
 
             }
         });
+    }
+
+
+
+    Call<List<Post>> postCall = dataSource.getPost("bearer 383d373bc2cc6dd3a0286b3eafc3c1178224cb880e36c87d6648e6feeb0a9d85");
+
+    GetResponse getResponse;
+    public void getPostListCall(final GetPost getPost){
+            postCall.enqueue(new Callback<List<Post>>() {
+                @Override
+                public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                    List<Post> posts = response.body();
+                    getPost.passPostList(posts);
+                }
+
+                @Override
+                public void onFailure(Call<List<Post>> call, Throwable t) {
+                    Log.e("failed", "onFailure: ");
+                }
+            });
     }
 
 }

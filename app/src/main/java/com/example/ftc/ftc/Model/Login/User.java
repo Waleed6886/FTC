@@ -31,6 +31,7 @@ public class User {
     @Expose
     private Role role;
 
+
     public String getUserId() {
         return userId;
     }

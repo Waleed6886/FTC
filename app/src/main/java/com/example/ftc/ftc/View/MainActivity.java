@@ -28,6 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,GetPost {
+    List<Post> listofPost= new ArrayList<>();
     private Post generateDumbData(){
         Post p = new Post();
         p.setDescription("this is the Description");
@@ -70,11 +71,13 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void init() {
-        List<Post> listofPost= new ArrayList<>();
-        for (int i=0;i<15;i++) {
-            listofPost.add(generateDumbData());
-            Log.w("loop counter",i+"");
-        }
+//        List<Post> listofPost= new ArrayList<>();
+//        for (int i=0;i<15;i++) {
+//            listofPost.add(generateDumbData());
+//            Log.w("loop counter",i+"");
+//        }
+        RemoteDataSource remoteDataSource = new RemoteDataSource();
+        remoteDataSource.getPostListCall(MainActivity.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         PostAdapter postAdapter = new PostAdapter(listofPost,this);
         RecyclerView recyclerView =findViewById(R.id.rec1);
@@ -151,6 +154,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void passPostList(final List list) {
-
+        listofPost = list;
     }
 }

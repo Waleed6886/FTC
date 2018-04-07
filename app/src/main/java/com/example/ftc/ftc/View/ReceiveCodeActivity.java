@@ -61,7 +61,7 @@ public class ReceiveCodeActivity extends AppCompatActivity implements LoaderMana
 
         // Store values at the time of the login attempt.
         String receivedCode = mCodeEditText.getText().toString();
-        LoginActivity.remoteDataSource.sendSMS(LoginActivity.user.getMobile(),receivedCode);
+//        LoginActivity.remoteDataSource.sendSMS(LoginActivity.user.getMobile(),receivedCode);
 
 
         boolean cancel = false;

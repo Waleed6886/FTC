@@ -3,7 +3,9 @@ package com.example.ftc.ftc.Model.Login;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Authenticator {
+import io.realm.RealmObject;
+
+public class Authenticator extends RealmObject {
     @SerializedName("user")
     @Expose
     private User user;

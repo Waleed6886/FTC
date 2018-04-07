@@ -4,14 +4,16 @@ import com.example.ftc.ftc.Model.Login.Role;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import io.realm.RealmObject;
+
+public class User extends RealmObject{
 
     @SerializedName("user_id")
     @Expose
     private String userId;
     @SerializedName("full_name")
     @Expose
-    private Object fullName;
+    private String fullName;
     @SerializedName("mobile")
     @Expose
     private String mobile;
@@ -20,7 +22,7 @@ public class User {
     private String code;
     @SerializedName("email")
     @Expose
-    private Object email;
+    private Boolean email;
     @SerializedName("email_activated")
     @Expose
     private boolean emailActivated;
@@ -43,11 +45,11 @@ public class User {
         this.userId = userId;
     }
 
-    public Object getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(Object fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
@@ -67,11 +69,11 @@ public class User {
         this.code = code;
     }
 
-    public Object getEmail() {
+    public Boolean getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(Boolean email) {
         this.email = email;
     }
 

@@ -13,8 +13,11 @@ import android.widget.EditText;
 
 
 import com.example.ftc.ftc.API.RemoteDataSource;
+import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.Model.Login.User;
 import com.example.ftc.ftc.R;
+
+import io.realm.Realm;
 
 /**
  * A login screen that offers login via email/password.
@@ -27,13 +30,15 @@ public class LoginActivity extends AppCompatActivity {
 //    private View mProgressView;
 //    private View mLoginFormView;
     static RemoteDataSource remoteDataSource = new RemoteDataSource();
-    static public User user = new User();
+    static public Authenticator authenticator = new Authenticator();
+    Realm realm;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        realm = Realm.getDefaultInstance(); // opens "myrealm.realm"
         // Set up the login form.
         mPhoneNumberEditText = findViewById(R.id.phoneNumber);
 
@@ -49,6 +54,12 @@ public class LoginActivity extends AppCompatActivity {
 //        mProgressView = findViewById(R.id.login_progress);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
+    }
+
     private void attemptLogin() {
 
         // Reset errors.
@@ -56,7 +67,8 @@ public class LoginActivity extends AppCompatActivity {
 
         // Store values at the time of the login attempt.
         String phoneNumber = mPhoneNumberEditText.getText().toString();
-        user.setMobile(phoneNumber);
+
+        authenticator.getUser().setMobile(phoneNumber);
         remoteDataSource.sendMobileNumber(phoneNumber);
 
 

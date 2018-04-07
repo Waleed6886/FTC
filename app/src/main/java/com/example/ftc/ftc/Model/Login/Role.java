@@ -3,7 +3,9 @@ package com.example.ftc.ftc.Model.Login;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Role {
+import io.realm.RealmObject;
+
+public class Role extends RealmObject{
 
     @SerializedName("role_id")
     @Expose

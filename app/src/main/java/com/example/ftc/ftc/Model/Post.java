@@ -1,6 +1,8 @@
 package com.example.ftc.ftc.Model;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.ftc.ftc.Model.Login.User;
 import com.google.gson.annotations.Expose;
@@ -9,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Locale;
 
-public class Post {
+public class Post implements Parcelable{
 
     @SerializedName("latitude")
     @Expose
@@ -44,6 +46,38 @@ public class Post {
     @SerializedName("user")
     @Expose
     private User user;
+
+    protected Post(Parcel in) {
+        if (in.readByte() == 0) {
+            latitude = null;
+        } else {
+            latitude = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            longitude = null;
+        } else {
+            longitude = in.readDouble();
+        }
+        description = in.readString();
+        metadataKey = in.readString();
+        postId = in.readString();
+        statusId = in.readInt();
+        postImage = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+    }
+
+    public static final Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
 
     public String getPostId() {
         return postId;
@@ -143,5 +177,31 @@ public class Post {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (latitude == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(latitude);
+        }
+        if (longitude == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(longitude);
+        }
+        dest.writeString(description);
+        dest.writeString(metadataKey);
+        dest.writeString(postId);
+        dest.writeInt(statusId);
+        dest.writeString(postImage);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+    }
 }

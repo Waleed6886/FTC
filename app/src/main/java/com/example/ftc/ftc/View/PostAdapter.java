@@ -2,6 +2,7 @@ package com.example.ftc.ftc.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
-    static List<Post> PostList;
+    List<Post> PostList;
     Context context;
 
     public PostAdapter(List<Post> PostList ,Context context){
@@ -64,6 +65,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     }
 
 
+    public void update(List<Post> posts) {
+        this.PostList.clear();
+        PostList.addAll(posts);
+        notifyDataSetChanged();
+    }
 
 
 
@@ -88,10 +94,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.w("onClick","clicked"+postion);
-                    Intent i = new Intent(context,PostDetails.class);
-                    i.putExtra("post",postion+"");
-                    context.startActivity(i);
+                    Intent intent = new Intent(context,PostDetails.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable(PostDetails.POST_KEY,(Post) view.getTag(R.id.Post));
+                    intent.putExtras(bundle);
+                    view.getContext().startActivity(intent);
                 }
             });
         }

@@ -29,20 +29,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,GetPost {
     List<Post> listofPost= new ArrayList<>();
-    private Post generateDumbData(){
-        Post p = new Post();
-        p.setDescription("this is the Description");
-        p.setLatitude(46.668108);
-        p.setLongitude(24.756080);
-        Metadata m=new Metadata();
-        m.setImgPath("http://cdn2.alphr.com/sites/alphr/files/styles/16x9_640/public/2018/01/6180104944_56c7ce7e91_b.jpg?itok=Wx-T0ms-");
-        m.setName("this is the name");
-        m.setType(1);
-        m.setWorkingHours("12PM - 3AM");
-        p.setMetadata(m);
-        return p;
+    private PostAdapter postAdapter;
 
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,15 +59,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void init() {
-//        List<Post> listofPost= new ArrayList<>();
-//        for (int i=0;i<15;i++) {
-//            listofPost.add(generateDumbData());
-//            Log.w("loop counter",i+"");
-//        }
         RemoteDataSource remoteDataSource = new RemoteDataSource();
         remoteDataSource.getPostListCall(MainActivity.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        PostAdapter postAdapter = new PostAdapter(listofPost,this);
+        postAdapter = new PostAdapter(listofPost,this);
         RecyclerView recyclerView =findViewById(R.id.rec1);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(postAdapter);
@@ -155,6 +138,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void passPostList(final List list) {
         listofPost = list;
+        postAdapter.update(list);
     }
 
 

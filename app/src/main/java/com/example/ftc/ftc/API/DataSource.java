@@ -24,6 +24,6 @@ public interface DataSource {
     @FormUrlEncoded
     Call<Authenticator> sendVerification(@Field("mobile") String mobile, @Field("code") String verificationCode);
 
-    @GET("/api/v1/posts?latitude=46.671665&longitude= 24.714811&status_id=0&radius_km=5")
+    @GET("api/v1/posts?metadata_key=waleed")
     Call<List<Post>> getPost(@Header("Authorization") String access_token);
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.Model.Post;
+import com.example.ftc.ftc.View.ReceiveCodeActivity;
 
 import java.util.List;
 
@@ -77,6 +78,7 @@ public class RemoteDataSource  {
                 Authenticator authenticator = bgRealm.createObject(Authenticator.class);
                 authenticator.getUser().setMobile(mobile);
                 authenticator.getUser().setCode(code);
+                ReceiveCodeActivity.LoggedCode=true;
             }
         }, new Realm.Transaction.OnSuccess() {
             @Override

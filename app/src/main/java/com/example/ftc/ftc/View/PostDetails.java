@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import com.example.ftc.ftc.Model.Post;
 import com.example.ftc.ftc.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,11 +29,11 @@ import java.util.Locale;
 TODO:MAKE A POST HAVE MORE THAN ONE IMAGE AND ENHANCE UI
  */
 
-public class PostDetails extends AppCompatActivity {
+public class PostDetails extends AppCompatActivity implements OnMapReadyCallback {
     TextView postTitle, postCategory, postDescription, postWorkingHours, postLocation;
     ImageView postImage;
     public static final String POST_KEY = "POST";
-
+    Post post;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_details);
@@ -36,7 +42,10 @@ public class PostDetails extends AppCompatActivity {
 
     private void init() {
         initializeViews();
-        setViews();
+        setViews(post);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -64,4 +73,11 @@ public class PostDetails extends AppCompatActivity {
             postLocation = findViewById(R.id.postDetailsLocation);
             postImage = findViewById(R.id.postDetailsImg);
         }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng foodTruckLocation = new LatLng(post.getLatitude(), post.getLongitude());
+        googleMap.addMarker(new MarkerOptions().position(foodTruckLocation)
+                .title(post.getMetadata().getName()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(foodTruckLocation));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(post.getLatitude(), post.getLongitude()), 12.0f));    }
     }

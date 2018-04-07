@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Metadata {
+    private String[] restaurantTypes={"Burger","Barbecue","Mexican","Chinese","Italian","Middle Eastern","Fast Food","Sandwich","Fried Chicken","Other"};
 
     @SerializedName("name")
     @Expose
@@ -37,14 +38,19 @@ public class Metadata {
     }
 
     public String getType() {
-        String[] restaurantTypes={"Burger","Barbecue","Mexican","Chinese","Italian","Middle Eastern","Fast Food","Sandwich","Fried Chicken"};
 
 
         return restaurantTypes[type];
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setType(String type) {
+        for (int i=0;i<restaurantTypes.length;i++){
+            if(type.equalsIgnoreCase(restaurantTypes[i])) {
+                this.type = i;
+                return;
+            }
+        }
+        this.type = restaurantTypes.length-1;
     }
 
     public String getWorkingHours() {

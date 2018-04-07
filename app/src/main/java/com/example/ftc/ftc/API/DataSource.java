@@ -24,6 +24,6 @@ public interface DataSource {
     @FormUrlEncoded
     Call<Authenticator> sendVerification(@Field("mobile") String mobile, @Field("code") String verificationCode);
 
-    @GET("api/v1/posts?metadata_key=waleed")
+    @GET("api/v1/posts?metadata_key=foodTruck")
     Call<List<Post>> getPost(@Header("Authorization") String access_token);
 }

@@ -27,13 +27,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private Post generateDumbData(){
+    private Post generateDumbData(int i){
         Post p = new Post();
         p.setDescription("this is the Description");
         p.setLatitude(46.668108);
         p.setLongitude(24.756080);
         Metadata m=new Metadata();
-        m.setImgPath("http://cdn2.alphr.com/sites/alphr/files/styles/16x9_640/public/2018/01/6180104944_56c7ce7e91_b.jpg?itok=Wx-T0ms-");
+        String[] urls={"https://power.cummins.com/sites/default/files/Food%20Truck_0.jpg","https://torontofoodtrucks.ca/wp-content/uploads/2016/03/20160722-wayhome2048-04.jpg","http://cerveceriaallende.mx/wp-content/uploads/2015/08/Bonkrep.jpg","https://d36tnp772eyphs.cloudfront.net/blogs/2/2016/11/tentempie-600x450.jpg"};
+        m.setImgPath(urls[i%urls.length]);
         m.setName("this is the name");
         m.setType(1);
         m.setWorkingHours("12PM - 3AM");
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity
     private void init() {
         List<Post> listofPost= new ArrayList<>();
         for (int i=0;i<15;i++) {
-            listofPost.add(generateDumbData());
+            listofPost.add(generateDumbData(i));
             Log.w("loop counter",i+"");
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);

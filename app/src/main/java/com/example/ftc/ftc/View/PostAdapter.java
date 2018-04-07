@@ -48,8 +48,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             holder.PostDescription.setText(post.getDescription());
         Picasso.get().load(post.getMetadata()
                 .getImgPath())
-                .centerCrop()
-                .resize(100,100)
                 .into(holder.PostMainImg);
         holder.setOnclick(position);
 

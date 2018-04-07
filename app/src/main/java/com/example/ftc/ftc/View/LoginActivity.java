@@ -24,8 +24,8 @@ public class LoginActivity extends AppCompatActivity {
 
     // UI references.
     private EditText mPhoneNumberEditText;
-    private View mProgressView;
-    private View mLoginFormView;
+//    private View mProgressView;
+//    private View mLoginFormView;
     static RemoteDataSource remoteDataSource = new RemoteDataSource();
     static public User user = new User();
 
@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+//        mLoginFormView = findViewById(R.id.login_form);
+//        mProgressView = findViewById(R.id.login_progress);
     }
 
     private void attemptLogin() {

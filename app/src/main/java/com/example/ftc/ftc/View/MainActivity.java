@@ -16,13 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.ftc.ftc.API.GetPost;
 import com.example.ftc.ftc.API.RemoteDataSource;
+import com.example.ftc.ftc.Model.Login.User;
 import com.example.ftc.ftc.Model.Metadata;
 import com.example.ftc.ftc.Model.Post;
 import com.example.ftc.ftc.R;
+import com.squareup.picasso.Picasso;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,9 +104,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -140,6 +145,32 @@ public class MainActivity extends AppCompatActivity
     public void passPostList(final List list) {
         listofPost = list;
         postAdapter.update(list);
+    }
+
+    public void displatUserInfo(User user){
+        ImageView profilePic=findViewById(R.id.imageView);
+        TextView userName=findViewById(R.id.userName);
+        TextView phoneNumber = findViewById(R.id.phoneNumber);
+
+        String name ="";
+        if(user!=null&&user.getFullName() !=null)
+            name=user.getFullName();
+        else
+            name="User";
+        userName.setText(name);
+        if(user !=null && user.getMobile()!=null)
+            phoneNumber.setText(user.getMobile());
+        else
+            phoneNumber.setText("+966568484248");
+        try {
+
+
+            if (user != null && user.getUrl() != null)
+                Picasso.get().load(user.getUrl()).into(profilePic);
+        }catch (Exception e){
+            Log.e("picasso",e.getMessage());
+        }
+
     }
 
 

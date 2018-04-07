@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -30,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 //    private View mProgressView;
 //    private View mLoginFormView;
     static RemoteDataSource remoteDataSource = new RemoteDataSource();
-    static public Authenticator authenticator = new Authenticator();
+    static Authenticator authenticator = new Authenticator();
+    String code;
     Realm realm;
 
 
@@ -67,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Store values at the time of the login attempt.
         String phoneNumber = mPhoneNumberEditText.getText().toString();
-
-        Authenticator.getUser().setMobile(phoneNumber);
-        remoteDataSource.sendMobileNumber(phoneNumber);
-
+        User user =new User();
+        user.setMobile(phoneNumber);
+        authenticator.setUser(user);
+        remoteDataSource.sendMobileNumber(authenticator.getUser().getMobile());
 
         boolean cancel = false;
         View focusView = null;
@@ -97,7 +99,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public void receiveCode(){
         Intent intent = new Intent(this, ReceiveCodeActivity.class);
-
         startActivity(intent);
     }
 

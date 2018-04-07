@@ -33,7 +33,7 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     TextView postTitle, postCategory, postDescription, postWorkingHours, postLocation;
     ImageView postImage;
     public static final String POST_KEY = "POST";
-    Post post;
+    Bundle extras = getIntent().getExtras();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_details);
@@ -42,7 +42,7 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
 
     private void init() {
         initializeViews();
-        setViews(post);
+        setViews();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -50,7 +50,7 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
     }
 
         private void setViews (){
-            Bundle extras = getIntent().getExtras();
+
             if (extras != null) {
                 Post postData = extras.getParcelable(POST_KEY);
 
@@ -75,9 +75,12 @@ public class PostDetails extends AppCompatActivity implements OnMapReadyCallback
         }
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        LatLng foodTruckLocation = new LatLng(post.getLatitude(), post.getLongitude());
+        if (extras != null) {
+            Post postData = extras.getParcelable(POST_KEY);
+        LatLng foodTruckLocation = new LatLng(postData.getLatitude(), postData.getLongitude());
         googleMap.addMarker(new MarkerOptions().position(foodTruckLocation)
-                .title(post.getMetadata().getName()));
+                .title(postData.getMetadata().getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(foodTruckLocation));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(post.getLatitude(), post.getLongitude()), 12.0f));    }
-    }
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(postData.getLatitude(), postData.getLongitude()), 12.0f));    }
+     }
+}

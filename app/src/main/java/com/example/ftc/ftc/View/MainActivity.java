@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         Metadata m=new Metadata();
         m.setImgPath("http://cdn2.alphr.com/sites/alphr/files/styles/16x9_640/public/2018/01/6180104944_56c7ce7e91_b.jpg?itok=Wx-T0ms-");
         m.setName("this is the name");
-        m.setType(1);
+        m.setType("Burger");
         m.setWorkingHours("12PM - 3AM");
         p.setMetadata(m);
         return p;
@@ -71,11 +71,10 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void init() {
-//        List<Post> listofPost= new ArrayList<>();
-//        for (int i=0;i<15;i++) {
-//            listofPost.add(generateDumbData());
-//            Log.w("loop counter",i+"");
-//        }
+        for (int i=0;i<15;i++) {
+            listofPost.add(generateDumbData());
+            Log.w("loop counter",i+"");
+        }
         RemoteDataSource remoteDataSource = new RemoteDataSource();
         remoteDataSource.getPostListCall(MainActivity.this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -130,16 +129,16 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             displayProfile();
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        } else if (id == R.id.nav_share) {
+//
+//        } else if (id == R.id.nav_send) {
+//
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

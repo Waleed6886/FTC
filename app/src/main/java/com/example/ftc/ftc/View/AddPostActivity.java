@@ -1,15 +1,28 @@
 package com.example.ftc.ftc.View;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
+import com.example.ftc.ftc.Model.Metadata;
+import com.example.ftc.ftc.Model.Post;
 import com.example.ftc.ftc.R;
+
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
 public class AddPostActivity extends AppCompatActivity {
 
@@ -17,8 +30,33 @@ public class AddPostActivity extends AppCompatActivity {
     private EditText mCategory;
     private EditText mDescription;
     private EditText mWorkingHours;
+    private Location getLastBestLocation() {
+        LocationManager mLocationManager = (LocationManager)
+                getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this,"Location Permissions denied",Toast.LENGTH_LONG).show();
+            return null;
+        }
+        Location locationGPS = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location locationNet = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
+        long GPSLocationTime = 0;
+        if (null != locationGPS) { GPSLocationTime = locationGPS.getTime(); }
 
+        long NetLocationTime = 0;
+
+        if (null != locationNet) {
+            NetLocationTime = locationNet.getTime();
+        }
+
+        if ( 0 < GPSLocationTime - NetLocationTime ) {
+            return locationGPS;
+        }
+        else {
+            return locationNet;
+        }
+    }
+    Location location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +77,8 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button mImageCamera = findViewById(R.id.uploadImageCamera);
         mImageCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +88,40 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
 
+        Button getLocation =findViewById(R.id.location);
+        getLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                location=getLastBestLocation();
+                if(location!=null)
+                    Log.d("check Location",location.getLatitude()+"");
+            }
+        });
+        Button submit = findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Post post=new Post();
+                try {
+                    post.setLongitude(location.getLongitude());
+                    post.setLatitude(location.getLatitude());
+                }catch (Exception e){
+                    Log.e("location",e.getMessage());
+                }
+
+                post.setDescription(mDescription.getText()+"");
+//        post.setUser();
+                Metadata metadata=new Metadata();
+                metadata.setWorkingHours(mWorkingHours.getText()+"");
+                metadata.setType(mCategory.getText()+"");
+//        metadata.setImgPath();
+                post.setMetadata(metadata);
+                post.setMetadataKey("foodTruck");
+            }
+        });
+
     }
+
+
 
 }

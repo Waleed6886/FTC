@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class Authenticator {
     @SerializedName("user")
     @Expose
-    private User user;
+    private static User user;
     @SerializedName("access_token")
     @Expose
     private String accessToken;
 
-    public User getUser() {
+    public static User getUser() {
         return user;
     }
 

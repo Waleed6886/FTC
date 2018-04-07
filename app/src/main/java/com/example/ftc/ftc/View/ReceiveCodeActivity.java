@@ -49,7 +49,7 @@ public class ReceiveCodeActivity extends AppCompatActivity implements LoaderMana
             }
         });
 
-        mLoginFormView = findViewById(R.id.login_form);
+        mLoginFormView = findViewById(R.id.parentView);
         mProgressView = findViewById(R.id.login_progress);
 
     }

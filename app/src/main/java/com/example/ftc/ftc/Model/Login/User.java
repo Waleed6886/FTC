@@ -30,6 +30,9 @@ public class User {
     @SerializedName("role")
     @Expose
     private Role role;
+    @SerializedName("url")
+    @Expose
+    private String url;
 
 
     public String getUserId() {
@@ -94,6 +97,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 }

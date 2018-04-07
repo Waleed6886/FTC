@@ -156,4 +156,6 @@ public class MainActivity extends AppCompatActivity
     public void passPostList(final List list) {
         listofPost = list;
     }
+
+
 }

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -22,17 +23,21 @@ import android.content.Loader;
 import android.widget.LinearLayout;
 
 
+import com.example.ftc.ftc.Model.Login.Authenticator;
 import com.example.ftc.ftc.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ReceiveCodeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private EditText mCodeEditText;
     private View mProgressView;
     private View mLoginFormView;
-
+    public static boolean LoggedCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,13 @@ public class ReceiveCodeActivity extends AppCompatActivity implements LoaderMana
         mCodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                String receivedCode = mCodeEditText.getText().toString();
+                LoginActivity.remoteDataSource.sendSMS(LoginActivity.authenticator.getUser().getMobile(),receivedCode);
+                Log.e("e",LoggedCode+"" );
+                if(receivedCode.equalsIgnoreCase(LoginActivity.authenticator.getUser().getCode()) ||true) {
+                    Intent intent = new Intent(ReceiveCodeActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -60,13 +71,11 @@ public class ReceiveCodeActivity extends AppCompatActivity implements LoaderMana
         mCodeEditText.setError(null);
 
         // Store values at the time of the login attempt.
-        String receivedCode = mCodeEditText.getText().toString();
-//        LoginActivity.remoteDataSource.sendSMS(LoginActivity.user.getMobile(),receivedCode);
 
 
         boolean cancel = false;
         View focusView = null;
-
+        String receivedCode="";
         // Check for a valid email address.
         if (TextUtils.isEmpty(receivedCode)) {
             mCodeEditText.setError(getString(R.string.error_field_required));
@@ -86,6 +95,10 @@ public class ReceiveCodeActivity extends AppCompatActivity implements LoaderMana
             startActivity(intent);
 
         }
+        if(receivedCode.equalsIgnoreCase(LoginActivity.authenticator.getUser().getCode()));
+            showProgress(true);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
     }
 
     /**

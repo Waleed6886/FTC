@@ -8,12 +8,12 @@ import io.realm.RealmObject;
 public class Authenticator extends RealmObject {
     @SerializedName("user")
     @Expose
-    private static User user;
+    private User user;
     @SerializedName("access_token")
     @Expose
     private String accessToken;
 
-    public static User getUser() {
+    public User  getUser() {
         return user;
     }
 
